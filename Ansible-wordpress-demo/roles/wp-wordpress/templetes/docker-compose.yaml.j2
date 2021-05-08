@@ -1,0 +1,23 @@
+version: '3.7'
+
+service:
+    wordpress:
+        image: wordpress
+        restart: always
+        ports: 
+            - 80:80
+        environment: 
+            WORDPRESS_DB_HOST: db
+            WORDPRESS_DB_USER: {{ databse_user }}
+            WORDPRESS_DB_PASSWORD: {{ databse_password }}
+            WORDPRESS_DB-NAME: {{ database_name }}
+    db:
+        image: mysql:5.7
+        restart: always
+        environment: 
+            MYSQL_DATABASE: {{ database_name }}
+            MYSQL_USER: {{ databse_user }}
+            MYSQL_PASSWORD: {{ databse_password }}
+            MYSQL_ROOT-PASSWORD: {{ mysql_root_password }}
+        volumes: 
+            - {{ mysql_dir }}:/var/lib/mysql
